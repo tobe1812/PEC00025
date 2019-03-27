@@ -26,7 +26,7 @@ _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 ## Parte I - Single degree of freedom systems
 
 
-### 3. (18/03) Laplace transform
+### 3. (18/03) The Laplace transform
 
 * [Jupyter notebook on Laplace transform](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_03_LaplaceTransform.ipynb?flushcache=true)
 
@@ -38,7 +38,9 @@ _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 
 * [Jupyter notebook on numerical integration](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_05_NumericalIntegration.ipynb?flushcache=true)
 
-### 6. (27/03) Fourier Transform
+### 6. (27/03) The Fourier Transform
+
+* [Jupyter notebook on Fourier transform](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_06_FourierTransform.ipynb?flushcache=true)
 
 ### 7. (01/04) Dynamic equilibrium in frequency domain
 
