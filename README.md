@@ -32,7 +32,11 @@ _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 
 ### 4. (20/03) Dynamic equilibrium in time domain
 
+* [Jupyter notebook on equilibrium in time domain](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_04_EquilibriumInTimeDomain.ipynb?flushcache=true)
+
 ### 5. (25/03) Numerical integration: finite differences and Duhamel method
+
+* [Jupyter notebook on numerical integration](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_05_NumericalIntegration.ipynb?flushcache=true)
 
 ### 6. (27/03) Fourier Transform
 
