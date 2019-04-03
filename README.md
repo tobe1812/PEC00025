@@ -32,7 +32,7 @@ _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 
 ### 4. (20/03) Dynamic equilibrium in time domain
 
-* [Jupyter notebook on equilibrium in time domain](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_04_EquilibriumInTimeDomain.ipynb?flushcache=true)
+* [Jupyter notebook on time domain analysis](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_04_TimeDomain.ipynb?flushcache=true)
 
 ### 5. (25/03) Numerical integration: finite differences and Duhamel method
 
@@ -43,6 +43,8 @@ _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 * [Jupyter notebook on Fourier transform](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_06_FourierTransform.ipynb?flushcache=true)
 
 ### 7. (01/04) Dynamic equilibrium in frequency domain
+
+* [Jupyter notebook on frequency domain analysis](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_07_FrequencyDomain.ipynb?flushcache=true)
 
 ### 8. (03/04) Integration, derivation and filtering in frequency domain
 
