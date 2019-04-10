@@ -40,19 +40,19 @@ _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 
 ### 6. (27/03) Numerical integration: finite differences and Duhamel method
 
-* [Jupyter notebook on numerical integration](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_06_NumericalIntegration.ipynb?flushcache=true)
+* [Notebook on numerical integration](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_06_NumericalIntegration.ipynb?flushcache=true)
 
 ### 7. (01/04) The Fourier Transform
 
-* [Jupyter notebook on Fourier transform](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_07_FourierTransform.ipynb?flushcache=true)
+* [Notebook on Fourier transform](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_07_FourierTransform.ipynb?flushcache=true)
 
 ### 8. (03/04) Vibration analysis frequency domain
 
-* [Jupyter notebook on frequency domain analysis](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_09_FrequencyDomain.ipynb?flushcache=true)
+* [Notebook on frequency domain analysis](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_09_FrequencyDomain.ipynb?flushcache=true)
 
 ### 9. (08/04) First test (P1)
 
-* [Jupyter notebook on frequency domain analysis](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_09_TestP1.ipynb?flushcache=true)
+* [Notebook with P1 samples](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_09_TestP1.ipynb?flushcache=true)
 
 
 ## Parte II - Multiple degrees of freedom and continuous systems
