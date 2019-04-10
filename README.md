@@ -28,27 +28,31 @@ _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 
 ### 3. (18/03) The Laplace transform
 
-* [Jupyter notebook on Laplace transform](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_03_LaplaceTransform.ipynb?flushcache=true)
+* [Notebook on Laplace transform](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_03_LaplaceTransform.ipynb?flushcache=true)
 
-### 4. (20/03) Dynamic equilibrium in time domain
+### 4. (20/03) Free vibration in time domain
 
-* [Jupyter notebook on time domain analysis](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_04_TimeDomain.ipynb?flushcache=true)
+* [Notebook on free vibration in time domain](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_04_FreeTimeDomain.ipynb?flushcache=true)
 
-### 5. (25/03) Numerical integration: finite differences and Duhamel method
+### 5. (25/03) Forced vibration in time domain
 
-* [Jupyter notebook on numerical integration](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_05_NumericalIntegration.ipynb?flushcache=true)
+* [Notebook on forced vibration in time domain](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_05_ForcedTimeDomain.ipynb?flushcache=true)
 
-### 6. (27/03) The Fourier Transform
+### 6. (27/03) Numerical integration: finite differences and Duhamel method
 
-* [Jupyter notebook on Fourier transform](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_06_FourierTransform.ipynb?flushcache=true)
+* [Jupyter notebook on numerical integration](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_06_NumericalIntegration.ipynb?flushcache=true)
 
-### 7. (01/04) Dynamic equilibrium in frequency domain
+### 7. (01/04) The Fourier Transform
 
-* [Jupyter notebook on frequency domain analysis](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_07_FrequencyDomain.ipynb?flushcache=true)
+* [Jupyter notebook on Fourier transform](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_07_FourierTransform.ipynb?flushcache=true)
 
-### 8. (03/04) Integration, derivation and filtering in frequency domain
+### 8. (03/04) Vibration analysis frequency domain
+
+* [Jupyter notebook on frequency domain analysis](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_09_FrequencyDomain.ipynb?flushcache=true)
 
 ### 9. (08/04) First test (P1)
+
+* [Jupyter notebook on frequency domain analysis](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_09_TestP1.ipynb?flushcache=true)
 
 
 ## Parte II - Multiple degrees of freedom and continuous systems
