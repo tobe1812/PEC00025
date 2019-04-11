@@ -58,9 +58,11 @@ _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 ## Parte II - Multiple degrees of freedom and continuous systems
 
 
-### 10. (10/04) Mass and stiffness matrices: system dynamic properties
+### 10. (10/04) From single to many degrees of freedom
 
-### 11. (15/04) Modal analysis and response to given initial conditions
+* [Notebook on system stiffness and mass matrices](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_10_FromSingleToMany.ipynb?flushcache=true)
+
+### 11. (15/04) Free vibration of multi degree of freedom systems
 
 ### 12. (17/04) Rayleigh quotient for estimating natural frequencies
 
