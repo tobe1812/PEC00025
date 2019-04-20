@@ -64,6 +64,8 @@ _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 
 ### 11. (15/04) Free vibration of multi degree of freedom systems
 
+* [Notebook on undamped free vibration of _mdof_](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_11_FreeVibrationMDOF.ipynb?flushcache=true)
+
 ### 12. (17/04) Rayleigh quotient for estimating natural frequencies
 
 ### 13. (22/04) 
