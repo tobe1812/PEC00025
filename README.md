@@ -68,7 +68,7 @@ _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 
 ### 12. (17/04) Forced vibration of multi degree of freedom systems
 
-* [Notebook on undamped forced vibration of _mdof_](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_12_ForcedVibrationMDOF.ipynb?flushcache=true)
+* [Notebook on forced vibration of _mdof_](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_12_ForcedVibrationMDOF.ipynb?flushcache=true)
 
 ### 13. (22/04) Modal superposition: examples of application 
 
