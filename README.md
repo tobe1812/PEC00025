@@ -66,25 +66,29 @@ _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 
 * [Notebook on undamped free vibration of _mdof_](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_11_FreeVibrationMDOF.ipynb?flushcache=true)
 
-### 12. (17/04) Rayleigh quotient for estimating natural frequencies
+### 12. (17/04) Forced vibration of multi degree of freedom systems
 
-### 13. (22/04) 
+* [Notebook on undamped forced vibration of _mdof_](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_12_ForcedVibrationMDOF.ipynb?flushcache=true)
 
-### 14. (24/04) 
+### 13. (22/04) Modal superposition: examples of application 
 
-### 15. (29/04) 
+* [Notebook on modal superposition applications](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_13_ExamplesModalSuperposition.ipynb?flushcache=true)
 
-### 16. (06/05) 
+### 14. (24/04) Continuous systems: the dynamic Timoshenko beam
 
-### 17. (08/05) Second test (P2)
+### 15. (29/04) Continuous systems: vibration of plates
+
+### 16. (06/05) Second test (P2)
 
 
 ## Parte III - Fundamental principles and numerical integration
 
 
-### 18. (13/05) Hamilton's principle
+### 17. (08/05) Hamilton's principle
 
-### 19. (15/05) Lagrange equation and applications
+### 18. (13/05) Lagrange equation and applications
+
+### 19. (15/05) The Rayleigh-Ritz method
 
 ### 20. (20/05) Integration of equilibrium equation im matrix form
 
