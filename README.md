@@ -64,7 +64,7 @@ _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 
 ### 17. (08/05) Hamilton's principle
 
-### 18. (13/05) Lagrange equation and applications
+### 18. (13/05) [Lagrange equation and applications](https://github.com/mmaiarocha/PEC00025/blob/master/resources/Class_18_LagrangesEquation.ipynb?flushcache=true)
 
 ### 19. (15/05) The Rayleigh-Ritz method
 
