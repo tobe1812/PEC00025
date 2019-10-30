@@ -74,45 +74,7 @@ class MRPy(np.ndarray):
 #=============================================================================
 # 2. Class constructors from other sources
 #=============================================================================
- 
-    def from_resampling(ti, Xi):
-        """
-        Resampling irregular time step to fixed time step. The last
-        element of ti is taken as total series duration. Series length
-        is kept unchanged.
- 
-        Parameters:  ti:    irregular time where samples are avaible
-                     Xi:    time series samples, taken at ti
-        """
 
-        sh =  Xi.shape
-        
-        if (len(sh) == 1): 
-            Xi = np.reshape(Xi,(1,sh[0]))
-			
-        elif (sh[0] > sh[1]):
-            Xi = Xi.T
-
-        sh =  Xi.shape
-        NX =  sh[0]
-        N  =  sh[1]                     # series length kept unchanged
-
-        t0 =  ti[0]
-        t1 =  ti[-1]
-
-        fs =  N/(t1 - t0)               # average sampling rate
-        
-        t  =  np.linspace(t0, t1, N)
-        X  =  np.empty((NX,N))
-        
-        for k in range(NX):
-            resX   =  interp1d(ti, Xi[k,:], kind='quadratic')
-            X[k,:] =  resX(t)
-
-        return MRPy(X, fs)
-
-#-----------------------------------------------------------------------------
-    
     def from_file(filename, form='mrpy'):
         """
         Load time series from file.
@@ -144,7 +106,7 @@ class MRPy(np.ndarray):
                     data =  pd.read_excel(target, sheet_name='MRPy')
                     ti   =  np.array(data.index, dtype=float)
                     
-                    return MRPy.from_resampling(ti, data.values)
+                    return MRPy.resampling(ti, data.values)
                 
 #--------------- 
             elif (form.lower() == 'columns'):
@@ -156,19 +118,7 @@ class MRPy(np.ndarray):
                     
                     ti   = data[:,0]
                     
-                    return MRPy.from_resampling(ti, data[:,1:])
-    
-#---------------    
-            elif (form.lower() == 'mpu6050'):
-    
-                with gz.open(filename+'.csv.gz', 'rb') as target:
-                
-                    data =  np.genfromtxt(target, 
-                                          delimiter=',')
-                    
-                    ti   =  data[:,0] - data[0,0]
-                    
-                    return MRPy.from_resampling(ti, data[:,1:]/16384)
+                    return MRPy.resampling(ti, data[:,1:])
 
 #---------------    
             elif (form.lower() == 'invh'):
@@ -181,7 +131,19 @@ class MRPy(np.ndarray):
                     
                     ti   =  data[:,0]
                     
-                    return MRPy.from_resampling(ti, data[:,1:-1])
+                    return MRPy.resampling(ti, data[:,1:-1])
+    
+#---------------    
+            elif (form.lower() == 'mpu6050'):
+    
+                with gz.open(filename+'.csv.gz', 'rb') as target:
+                
+                    data =  np.genfromtxt(target, 
+                                          delimiter=',')
+                    
+                    ti   =  data[:,0] - data[0,0]
+                    
+                    return MRPy.resampling(ti, data[:,1:]/16384)
 
 #--------------- 
             else:
@@ -203,7 +165,7 @@ class MRPy(np.ndarray):
                           the length of simulation will not be as expected!)
                           The largest dimension of Sx is assumed to be the
                           frequency axis.
-                     fs:  sampling frequency
+                     fs:  sampling frequency in Hz
         """
 
         sh  =  Sx.shape
@@ -250,51 +212,24 @@ class MRPy(np.ndarray):
                            will be approximately 2Tmax.
         """
 
-        sh  =  Cx.shape
-
-        if (len(sh) == 1): 
-            Cx = np.reshape(Cx,(1,sh[0]))
-        else:
-            if (sh[0] > sh[1]):
-                Cx = Cx.T
-
-        sh  =  Cx.shape
-        NX  =  sh[0]
-        M0  =  sh[1]
-        M   =  M0 - (np.mod(M0,2) == 0)     # ensure M is odd
-
-        Cx  =  Cx[:, 0:M]
+        Sx, fs = MRPy.Cx2Sx(Cx, Tmax)
         
-        err =  M/M0             
-        fs  = (M - 1)/(err*Tmax)            # eventually corrects for Tmax
-        
-        Sx  =  np.empty((NX, M))
-
-        for k in range(NX): 
-            
-            C       =  np.hstack((Cx[k,:], Cx[k,-2:0:-1]))
-            C       =  np.fft.fft(C)*2/fs
-            Sx[k,:] =  np.real(C[0:M])
-
         return MRPy.from_periodogram(Sx, fs)
 
 #-----------------------------------------------------------------------------
 
-    def from_pseudo(Sx, Tmax, T, zeta=0.05):  # NOT READY!!!
+    def from_pseudo(Sa, Tmax, T, zeta=0.05):  # NOT READY!!!
         """
-        Simulate RPs from a given pseudo spectra, which are the
-        peak response amplitude of a single degree of freedom system, as a
-        function of system natural period of vibration, subjected to a
-        certain type of excitation. The usual application is for the
-        pseudo acceleration spectra of seismic excitation. 
+        Simulate ground acceleration records from a given pseudo acceleration 
+        spectra.  
  
-        Parameters:  Sx:   pseudo spectras as ndarray (must have odd
-                           length, otherwise it will be truncated by 1 and
+        Parameters:  Sa:   acceleration pseudo spectra as ndarray (must have 
+                           odd length, otherwise it will be truncated by 1 and
                            the length of simulation will not be as expected!)
-                           The largest dimension of Sx is assumed to be the
+                           The largest dimension of Sa is assumed to be the
                            period axis.
                      Tmax: largest period, associated to the last element
-                           in array Sx. Defines process duration, which
+                           in array Sa. Defines process duration, which
                            will be approximately 2Tmax. 
                      T:    tuple (T1, T2, T0) defining envelope timing, where
                            T1 is the end of attack time, T2 is the end of
@@ -304,15 +239,15 @@ class MRPy(np.ndarray):
                            provided or default value of 5% is assumed.
         """
 
-        sh  =  Sx.shape
+        sh  =  Sa.shape
 
         if (len(sh) == 1): 
-            Sx = np.reshape(Sx,(1,sh[0]))
+            Sa = np.reshape(Sa,(1,sh[0]))
         else:
             if (sh[0] > sh[1]):
-                Sx = Sx.T
+                Sa = Sa.T
 
-        sh  =  Sx.shape
+        sh  =  Sa.shape
         NX  =  sh[0]
         M0  =  sh[1]
         M   =  M0 - (np.mod(M0,2) == 0)     # ensure M is odd
@@ -320,10 +255,23 @@ class MRPy(np.ndarray):
 
         err =  M/M0             
         fs  = (M - 1)/(err*Tmax)            # eventually corrects for Tmax
+        f   =  np.linspace(0, fs/2, M)
+        tau =  np.linspace(0, Tmax, M)
         
-        X   =  MRPy(np.random.randn(NX, N), fs)
+        fi      =  np.zeros(M)
+        fi[1:]  =  1/tau[:0:-1]  
+        
+        X   =  np.empty((NX,N))
+        
+        for k in range(NX):
 
-        return X.Kanai().envelope(T)
+            Sxi     = np.zeros(M)                        
+            Sxi[1:] = Sa[k,1:]
+            fSx = interp1d(fi, Sxi, kind='quadratic') 
+            
+            X[k]  = MRPy.from_periodogram(fSx(f), fs)
+            X[k] *= Sa.max()/X[k].max()        
+        return MRPy(X, fs).Kanai().envelope(T)
 
 #=============================================================================
 # 3. Class constructors by modification
@@ -357,7 +305,6 @@ class MRPy(np.ndarray):
         X   = np.zeros((1, self.N))
 
         for kX, row in enumerate(self):  
-            
             X[0,:] += weight[kX]*row
 
         return MRPy(X, self.fs)
@@ -563,13 +510,7 @@ class MRPy(np.ndarray):
         Parameters:  band: frequency band to keep, tuple: (f_low, f_high)
         """
 
-        if (band == None):
-            band[0] = 0.
-            band[1] = self.fs/2
-
-        elif (band[1] > self.fs/2):
-            warn('Upper band limit truncated to fs/2')
-            band[1] = self.fs/2
+        b0, b1 = MRPy.check_band(self.fs, band)
 
         X  = np.empty((self.NX, self.N))
         f  = self.f_axis(); f[0] = f[1]     # avoid division by zero
@@ -581,7 +522,7 @@ class MRPy(np.ndarray):
             
             Xw[0]  = 0.                     # disregard integration constant
             
-            Xw[(f <= band[0]) | (f > band[1])] = 0.
+            Xw[(f <= b0) | (f > b1)] = 0.
             
             X[kX,:] = np.real(np.fft.ifft(
                       np.hstack((Xw, np.conj(Xw[-2:0:-1])))))
@@ -597,13 +538,7 @@ class MRPy(np.ndarray):
         Parameters:  band: frequency band to keep, tuple: (f_low, f_high)
         """
 
-        if (band == None):
-            band[0] = 0.
-            band[1] = self.fs/2
-
-        elif (band[1] > self.fs/2):
-            warn('Upper band limit truncated to fs/2')
-            band[1] = self.fs/2
+        b0, b1 = MRPy.check_band(self.fs, band)
 
         X  = np.empty((self.NX, self.N))
         f  = self.f_axis(); f[0] = f[1]     # avoid division by zero
@@ -613,7 +548,7 @@ class MRPy(np.ndarray):
             Xw = np.fft.fft(row)[0:self.M]
             Xw = Xw * (2j*np.pi*f)          # multiplication means derivation
             
-            Xw[(f <= band[0]) | (f > band[1])] = 0.
+            Xw[(f <= b0) | (f > b1)] = 0.
             
             X[kX,:] = np.real(np.fft.ifft(
                       np.hstack((Xw, np.conj(Xw[-2:0:-1])))))
@@ -862,29 +797,7 @@ class MRPy(np.ndarray):
 # 4. Class constructors from conceptual properties
 #=============================================================================
 
-    def check_fs(N, fs, Td):
-        """
-        Verifies if either fs or Td are given, and returns 
-        the standard property fs
-        """
-            
-        if (np.mod(N, 2) != 0):              # enforce N to be even
-            N   =  N - 1
-
-        if ((fs != None) & (Td == None)):    # if fs is available...
-            pass
-
-        elif ((fs == None) & (Td != None)):  # if Td is available
-            fs = N/Td
-
-        else: 
-            sys.exit('Either fs or Td must be specified!')
-        
-        return fs, N/fs
-        
-#-----------------------------------------------------------------------------
-
-    def zero_process(NX=1, N=1000, fs=None, Td=None):
+    def zeros(NX=1, N=1024, fs=None, Td=None):
         """
         Add up all series in MRPy weighted by 'weight'.
         
@@ -900,7 +813,7 @@ class MRPy(np.ndarray):
 
 #-----------------------------------------------------------------------------
 
-    def Dirac(NX=1, N=1000, t0=0.0, fs=None, Td=None):
+    def Dirac(NX=1, N=1024, t0=0.0, fs=None, Td=None):
         """
         Add up all series in MRPy weighted by 'weight'.
         
@@ -920,7 +833,7 @@ class MRPy(np.ndarray):
 
 #-----------------------------------------------------------------------------
 
-    def Heaviside(NX=1, N=1000, t0=0.0, fs=None, Td=None):
+    def Heaviside(NX=1, N=1024, t0=0.0, fs=None, Td=None):
         """
         Add up all series in MRPy weighted by 'weight'.
         
@@ -940,37 +853,55 @@ class MRPy(np.ndarray):
 
 #-----------------------------------------------------------------------------
 
-    def white_noise(NX=1, N=1000, fs=None, Td=None):
+    def white_noise(NX=1, N=1024, fs=None, Td=None, band=None):
         """
-        Add up all series in MRPy weighted by 'weight'.
+        Simulates a band-limited Gaussian white noise'.
         
-        Parameters: NX: number of processes in the MRPy object.
-                    N:  length of each process.
-                    fs: sampling frequency (in Hz), or alternatively
-                    Td: processes duration (second)
+        Parameters: NX:   number of processes in the MRPy object.
+                    N:    length of each process.
+                    fs:   sampling frequency (in Hz), or alternatively
+                    Td:   processes duration (second)
+                    band: band with nonzero power (in Hz)
         """
 
         fs, Td  = MRPy.check_fs(N, fs, Td)
+        b0, b1  = MRPy.check_band(fs, band)
+        
         M       = N//2 + 1
-        Sx      = np.ones((NX, M))*Td/M
+        Sx      = np.ones((NX, M))
+
+        k0 = np.int(2*M*b0/fs)
+        k1 = np.int(2*M*b1/fs)
+            
+        Sx[:,:k0] = 0.
+        Sx[:,k1:] = 0.
 
         return MRPy.from_periodogram(Sx, fs)
 
 #-----------------------------------------------------------------------------
 
-    def pink_noise(NX=1, N=1000, fs=None, Td=None):
+    def pink_noise(NX=1, N=1024, fs=None, band=None):
         """
         Add up all series in MRPy weighted by 'weight'.
         
-        Parameters: NX: number of processes in the MRPy object.
-                    N:  length of each process.
-                    fs: sampling frequency (in Hz), or alternatively
-                    Td: processes duration (second)
+        Parameters: NX:    number of processes in the MRPy object.
+                    N:     length of each process.
+                    fs:    sampling frequency (in Hz), or alternatively
+                    Td:    processes duration (second)
+                    band: band with nonzero power (in Hz)
         """
 
         fs, Td  = MRPy.check_fs(N, fs, Td)
+        b0, b1  = MRPy.check_band(fs, band)
+        
         M       = N//2 + 1
-        Sx      = np.ones((NX, M))*Td/M
+        Sx      = np.ones((NX, M))
+
+        k0 = np.int(2*M*b0/fs)
+        k1 = np.int(2*M*b1/fs)
+            
+        Sx[:,:k0] = 0.
+        Sx[:,k1:] = 0.
 
         return MRPy.from_periodogram(Sx, fs)
 
@@ -1007,9 +938,6 @@ class MRPy(np.ndarray):
         Sx, fs  =  self.periodogram()
 
         for kX in range(self.NX):
-            
-            Fx  =  np.fft.fft(self[kX,:] - self[kX,:].mean())
-            Sxk =  np.real(Fx*Fx.conj())*2/self.N/self.fs
             
             Sxk =  np.hstack((Sx[kX,:], Sx[kX,-2:0:-1]))
             Cxk =  np.fft.ifft(Sxk)*fs/2
@@ -1060,7 +988,8 @@ class MRPy(np.ndarray):
                     X    = self.sdof_Duhamel(1/T[k], zeta)
                     umax = np.abs(X).max(axis=1)
                     
-                    if ~np.any(np.isnan(umax)): Sx[:,k] = umax
+                    if ~np.any(np.isnan(umax)): 
+                        Sx[:,k] = umax
         
         return Sx, Tmax
 
@@ -1151,6 +1080,16 @@ class MRPy(np.ndarray):
 #=============================================================================
 # 6. Utilities
 #=============================================================================
+
+    def attributes(self):
+        
+        s1 =  ' fs = {0:.1f}Hz\n Td = {1:.1f}s\n'
+        s2 =  ' NX = {0}\n N  = {1}\n M  = {2}'   
+        
+        print(s1.format(self.fs, self.Td))
+        print(s2.format(self.NX, self.N, self.M))
+
+#-----------------------------------------------------------------------------
 
     def t_axis(self):        
         return np.linspace(0, self.Td, self.N)
@@ -1280,7 +1219,7 @@ class MRPy(np.ndarray):
     def plot_pseudo(self, fig=0, figsize=(12, 8), axis_T=None):
         
         plt.figure(fig, figsize=figsize)
-        plt.suptitle('Pseudo Spectrum', fontsize=14)
+        plt.suptitle('Displacement Response Spectrum', fontsize=14)
         
         Sx, Tmax = self.pseudo()
         
@@ -1335,6 +1274,179 @@ class MRPy(np.ndarray):
             sys.exit('Data formatting not available!')
             
         return None
+
+#=============================================================================
+# 7. Helpers
+#=============================================================================
+ 
+    def resampling(ti, Xi):
+        """
+        Resampling irregular time step to fixed time step. The last
+        element of ti is taken as total series duration. Series length
+        is kept unchanged.
+ 
+        Parameters:  ti:    irregular time where samples are avaible
+                     Xi:    time series samples, taken at ti
+        """
+
+        sh =  Xi.shape
+        
+        if (len(sh) == 1): 
+            Xi = np.reshape(Xi,(1,sh[0]))
+			
+        elif (sh[0] > sh[1]):
+            Xi = Xi.T
+
+        sh =  Xi.shape
+        NX =  sh[0]
+        N  =  sh[1]                     # series length kept unchanged
+
+        t0 =  ti[0]
+        t1 =  ti[-1]
+
+        fs =  N/(t1 - t0)               # average sampling rate
+        
+        t  =  np.linspace(t0, t1, N)
+        X  =  np.empty((NX,N))
+        
+        for k in range(NX):
+            resX   =  interp1d(ti, Xi[k,:], kind='linear')
+            X[k,:] =  resX(t)
+
+        return MRPy(X, fs)
+
+#-----------------------------------------------------------------------------
+
+    def check_fs(N, fs, Td):
+        """
+        Verifies if either fs or Td are given, and returns 
+        both properties verifyed
+        """
+            
+        if (np.mod(N, 2) != 0):              # enforce N to be even
+            N   =  N - 1
+
+        if ((fs != None) & (Td == None)):    # if fs is available...
+            pass
+
+        elif ((fs == None) & (Td != None)):  # if Td is available
+            fs = N/Td
+
+        else: 
+            sys.exit('Either fs or Td must be specified!')
+        
+        return fs, N/fs
+
+
+#-----------------------------------------------------------------------------
+
+    def check_band(fs, band):
+        """
+        Verifies if provided frequency band is consistent.
+        """
+        
+        if (band == None):
+            b0 = 0.
+            b1 = fs/2
+        
+        else:
+            b0 = band[0]
+            b1 = band[1]
+
+        if (b0 < 0):
+            warn('Lower band limit truncated to 0!')
+            b0 = 0
+
+        if (b1 > fs/2):
+            warn('Upper band limit truncated to fs/2!')
+            b1 = fs/2
+        
+        return b0, b1
+    
+#-----------------------------------------------------------------------------
+
+    def Cx2Sx(Cx, Tmax):
+        """
+        Returns the spectral density corresponding to a given
+        autocovariance function.
+ 
+        Parameters:  Cx:   autocovariances as ndarray (must have odd
+                           length, otherwise it will be truncated by 1 and
+                           the length of simulation will not be as expected!)
+                           The largest dimension of Cx is assumed to be the
+                           time gap axis.
+                     Tmax: largest time gap, associated to the last element
+                           in array Cx. Defines process duration, which 
+                           will be approximately 2Tmax.
+        """
+
+        sh  =  Cx.shape
+
+        if (len(sh) == 1): 
+            Cx = np.reshape(Cx,(1,sh[0]))
+        else:
+            if (sh[0] > sh[1]):
+                Cx = Cx.T
+
+        sh  =  Cx.shape
+        NX  =  sh[0]
+        M0  =  sh[1]
+        M   =  M0 - (np.mod(M0,2) == 0)     # ensure M is odd
+
+        Cx  =  Cx[:, 0:M]
+        
+        err =  M/M0             
+        fs  = (M - 1)/(err*Tmax)            # eventually corrects for Tmax
+        
+        Sx  =  np.empty((NX, M))
+
+        for k in range(NX): 
+            
+            C       =  np.hstack((Cx[k,:], Cx[k,-2:0:-1]))
+            C       =  np.fft.fft(C)*2/fs
+            Sx[k,:] =  np.real(C[0:M])
+
+        return Sx, fs
+
+#-----------------------------------------------------------------------------
+
+    def Sx2Cx(Sx, fs):
+        """
+        Returns the autocovariance corresponding to a given
+        spectral density.
+ 
+        Parameters:  Sx:  spectral density as ndarray (must have odd
+                          length, otherwise it will be truncated by 1 and
+                          the length of simulation will not be as expected!)
+                          The largest dimension of Sx is assumed to be the
+                          frequency axis.
+                     fs:  sampling frequency in Hz
+        """
+        
+        sh  =  Sx.shape
+
+        if (len(sh) == 1): 
+            Sx = np.reshape(Sx,(1,sh[0]))
+        else:
+            if (sh[0] > sh[1]):
+                Sx = Sx.T
+
+        sh  =  Sx.shape
+        NX  =  sh[0]
+        M0  =  sh[1]
+        M   =  M0 - (np.mod(M0,2) == 0)     # ensure M is odd
+
+        Tmax = (M - 1)/fs
+        Cx   =  np.empty((NX, M))
+
+        for kX in range(NX):
+            
+            Sxk =  np.hstack((Sx[kX,:], Sx[kX,-2:0:-1]))
+            Cxk =  np.fft.ifft(Sxk)*fs/2
+            
+            Cx[kX,:] =  np.real(Cxk[:M])
+
+        return Cx, Tmax
 
 #=============================================================================
 #=============================================================================
