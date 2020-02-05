@@ -1,5 +1,7 @@
 #  PEC00025 - INTRODUCTION TO VIBRATION THEORY
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mmaiarocha/PEC00025/master)
+
 _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 
 
