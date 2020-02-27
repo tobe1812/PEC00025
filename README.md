@@ -78,4 +78,4 @@ _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 
 ### 23. (20/05 - 4a.) Third test (P3)
 
-### 24. (25/06 - 2a.) Retake test
+### 24. (25/05 - 2a.) Retake test
