@@ -28,37 +28,37 @@ _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 ## Parte I - Single degree of freedom systems
 
 
-### 3. (18/03) [The Laplace transform](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_03_LaplaceTransform.ipynb?flushcache=true)
+### 3. (18/03) [The Laplace transform](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_03_LaplaceTransform.ipynb?flushcache=true)
 
-### 4. (20/03) [Free vibration in time domain](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_04_FreeTimeDomain.ipynb?flushcache=true)
+### 4. (20/03) [Free vibration in time domain](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_04_FreeTimeDomain.ipynb?flushcache=true)
 
-### 5. (25/03) [Forced vibration in time domain](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_05_ForcedTimeDomain.ipynb?flushcache=true)
+### 5. (25/03) [Forced vibration in time domain](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_05_ForcedTimeDomain.ipynb?flushcache=true)
 
-### 6. (27/03) [Numerical integration: finite differences and Duhamel method](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_06_NumericalIntegration.ipynb?flushcache=true)
+### 6. (27/03) [Numerical integration: finite differences and Duhamel method](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_06_NumericalIntegration.ipynb?flushcache=true)
 
-### 7. (01/04) [The Fourier Transform](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_07_FourierTransform.ipynb?flushcache=true)
+### 7. (01/04) [The Fourier Transform](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_07_FourierTransform.ipynb?flushcache=true)
 
-### 8. (03/04) [Vibration analysis frequency domain](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_09_FrequencyDomain.ipynb?flushcache=true)
+### 8. (03/04) [Vibration analysis frequency domain](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_09_FrequencyDomain.ipynb?flushcache=true)
 
-### 9. (08/04) [First test (P1)](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_09_TestP1.ipynb?flushcache=true)
+### 9. (08/04) [First test (P1)](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_09_TestP1.ipynb?flushcache=true)
 
 
 ## Parte II - Multiple degrees of freedom and continuous systems
 
 
-### 10. (10/04) [From single to many degrees of freedom](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_10_FromSingleToMany.ipynb?flushcache=true)
+### 10. (10/04) [From single to many degrees of freedom](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_10_FromSingleToMany.ipynb?flushcache=true)
 
-### 11. (15/04) [Free vibration of multi degree of freedom systems](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_11_FreeVibrationMDOF.ipynb?flushcache=true)
+### 11. (15/04) [Free vibration of multi degree of freedom systems](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_11_FreeVibrationMDOF.ipynb?flushcache=true)
 
-### 12. (17/04) [Forced vibration of multi degree of freedom systems](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_12_ForcedVibrationMDOF.ipynb?flushcache=true)
+### 12. (17/04) [Forced vibration of multi degree of freedom systems](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_12_ForcedVibrationMDOF.ipynb?flushcache=true)
 
-### 13. (22/04) [Modal superposition: examples of application](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_13_ExamplesModalSuperposition.ipynb?flushcache=true)
+### 13. (22/04) [Modal superposition: examples of application](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_13_ExamplesModalSuperposition.ipynb?flushcache=true)
 
-### 14. (24/04) [Continuous systems: vibration of beams](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_14_VibrationOfBeams.ipynb?flushcache=true)
+### 14. (24/04) [Continuous systems: vibration of beams](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_14_VibrationOfBeams.ipynb?flushcache=true)
 
-### 15. (29/04) [Continuous systems: vibration of plates](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_15_VibrationOfPlates.ipynb?flushcache=true)
+### 15. (29/04) [Continuous systems: vibration of plates](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_15_VibrationOfPlates.ipynb?flushcache=true)
 
-### 16. (06/05) [Second test (P2)](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/resources/Class_16_TestP2.ipynb?flushcache=true)
+### 16. (06/05) [Second test (P2)](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_16_TestP2.ipynb?flushcache=true)
 
 
 ## Parte III - Fundamental principles and numerical integration
@@ -66,7 +66,7 @@ _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 
 ### 17. (08/05) Hamilton's principle
 
-### 18. (13/05) [Lagrange equation and applications](https://github.com/mmaiarocha/PEC00025/blob/master/resources/Class_18_LagrangesEquation.ipynb?flushcache=true)
+### 18. (13/05) [Lagrange equation and applications](https://github.com/mmaiarocha/PEC00025/blob/master/Class_18_LagrangesEquation.ipynb?flushcache=true)
 
 ### 19. (15/05) The Rayleigh-Ritz method
 
