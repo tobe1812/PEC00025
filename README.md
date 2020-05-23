@@ -38,7 +38,7 @@ _Prof. Marcelo Maia Rocha, PPGEC/UFRGS_
 
 ### 7. (23/03 - 2a.) [The Fourier Transform](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_07_FourierTransform.ipynb?flushcache=true)
 
-### 8. (25/03 - 4a.) [Vibration analysis frequency domain](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_09_FrequencyDomain.ipynb?flushcache=true)
+### 8. (25/03 - 4a.) [Vibration analysis frequency domain](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_08_FrequencyDomain.ipynb?flushcache=true)
 
 ### 9. (30/03 - 2a.) [First test (P1)](https://nbviewer.jupyter.org/github/mmaiarocha/PEC00025/blob/master/Class_09_TestP1.ipynb?flushcache=true)
 
